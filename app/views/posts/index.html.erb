@@ -11,6 +11,7 @@
 <%= form_with url: posts_path, method: :get, local: true, class: "search-form" do |form| %>
   <%= form.text_field :search, value: params[:search], placeholder: "Search posts...",
                       class: "form-control" %>
+  <%= form.select :user_id, [], { include_blank: true, selected: params[:user_id] }, { class: "form-control", placeholder: "Filter by user" } %>
   <%= form.submit "Search", class: "btn btn-primary" %>
 <% end %>
 
@@ -36,6 +37,8 @@
 
           <% if user_signed_in? && post.user == current_user %>
             <%= link_to "Edit", edit_post_path(post), class: "btn btn-outline btn-sm" %>
+
+            <% # Delete isn't working correctly %>
             <%= link_to "Delete", post_path(post), method: :delete,
                         confirm: "Are you sure?", class: "btn btn-danger btn-sm" %>
           <% end %>

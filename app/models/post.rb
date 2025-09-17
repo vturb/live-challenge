@@ -7,11 +7,16 @@ class Post < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :recent, -> { order(created_at: :desc) }
-  scope :by_user, ->(user) { where(user: user) }
+
+  # Candidate can implement filtering by user here
+  scope :by_user, ->(user) do
+    # implement filtering logic
+  end
 
   # Candidate can implement search functionality here
   scope :search, ->(term) do
-    where("title ILIKE ? OR content ILIKE ?", "%#{term}%", "%#{term}%") if term.present?
+    # implement a simple search
+    # Define ordering by relevance if needed
   end
 
   def excerpt(limit = 150)
