@@ -23,17 +23,6 @@ This is a pre-configured Rails application designed for technical interviews. It
 
 Additional test users: john@example.com, jane@example.com, bob@example.com, alice@example.com (all with password: password123)
 
-## Interview Tasks
-
-See [INTERVIEW_TASKS.md](INTERVIEW_TASKS.md) for detailed task descriptions and evaluation criteria.
-
-### Available Tasks:
-1. **Comments System** (15 min) - Implement nested comments functionality
-2. **Advanced Search** (12 min) - Enhance post search with filters
-3. **API Endpoints** (15 min) - Create RESTful JSON API
-4. **Nested Attributes** (10 min) - Post tags with validation
-5. **Performance Optimization** (8 min) - Fix N+1 queries and caching
-
 ## Technology Stack
 
 - **Rails** 8.0+
@@ -185,7 +174,3 @@ This project is designed for interview purposes. To suggest improvements:
 ## License
 
 MIT License - See LICENSE file for details.
-
----
-
-**Ready to start coding?** Open this project in GitHub Codespaces and begin your Rails interview challenge!
