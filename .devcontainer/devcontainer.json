@@ -1,0 +1,13 @@
+{
+  "name": "Rails Interview Environment",
+  "dockerComposeFile": "compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "postCreateCommand": "bundle install && rails db:create && rails db:migrate && rails db:seed",
+  "forwardPorts": [3000, 5432, 6379],
+  "customizations": {
+    "vscode": {
+      "extensions": ["shopify.ruby-lsp", "rebornix.Ruby"]
+    }
+  }
+}

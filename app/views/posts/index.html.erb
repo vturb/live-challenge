@@ -1,0 +1,60 @@
+<% content_for :title, "All Posts" %>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Blog Posts</h1>
+  <% if user_signed_in? %>
+    <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<!-- Search form for candidates to enhance -->
+<%= form_with url: posts_path, method: :get, local: true, class: "search-form" do |form| %>
+  <%= form.text_field :search, value: params[:search], placeholder: "Search posts...",
+                      class: "form-control" %>
+  <%= form.submit "Search", class: "btn btn-primary" %>
+<% end %>
+
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= link_to post.title, post_path(post) %>
+        </h5>
+
+        <div class="post-meta">
+          By <%= post.user.full_name %> •
+          <%= time_ago_in_words(post.created_at) %> ago
+        </div>
+
+        <p class="card-text">
+          <%= post.excerpt %>
+        </p>
+
+        <div class="post-actions">
+          <%= link_to "Read More", post_path(post), class: "btn btn-primary btn-sm" %>
+
+          <% if user_signed_in? && post.user == current_user %>
+            <%= link_to "Edit", edit_post_path(post), class: "btn btn-outline btn-sm" %>
+            <%= link_to "Delete", post_path(post), method: :delete,
+                        confirm: "Are you sure?", class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="text-center">
+    <h3>No posts found</h3>
+    <p class="text-muted">
+      <% if params[:search].present? %>
+        No posts match your search for "<%= params[:search] %>".
+      <% else %>
+        Be the first to create a post!
+      <% end %>
+    </p>
+    <% if user_signed_in? %>
+      <%= link_to "Create First Post", new_post_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+<% end %>

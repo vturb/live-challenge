@@ -1,0 +1,61 @@
+<% content_for :title, @post.title %>
+
+<article class="card">
+  <div class="card-body">
+    <h1 class="card-title"><%= @post.title %></h1>
+
+    <div class="post-meta">
+      By <%= @post.user.full_name %> •
+      <%= @post.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+    </div>
+
+    <div class="post-content mt-3">
+      <%= simple_format(@post.content) %>
+    </div>
+
+    <% if user_signed_in? && @post.user == current_user %>
+      <div class="post-actions">
+        <%= link_to "Edit", edit_post_path(@post), class: "btn btn-outline btn-sm" %>
+        <%= link_to "Delete", post_path(@post), method: :delete,
+                    confirm: "Are you sure?", class: "btn btn-danger btn-sm" %>
+      </div>
+    <% end %>
+  </div>
+</article>
+
+<!-- Comments section for candidates to enhance -->
+<div class="comments-section">
+  <h3>Comments (<%= @post.comments.approved.count %>)</h3>
+
+  <!-- Display approved comments -->
+  <% @post.comments.approved.recent.each do |comment| %>
+    <div class="comment">
+      <div class="comment-author">
+        <%= comment.user.full_name %>
+      </div>
+      <div class="comment-content">
+        <%= simple_format(comment.content) %>
+      </div>
+      <div class="comment-meta">
+        <%= time_ago_in_words(comment.created_at) %> ago
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Comment form (only for logged in users) -->
+  <% if user_signed_in? %>
+    <div class="comment-form mt-3">
+      <h4>Add a Comment</h4>
+      <!-- Candidates can implement the comment form here -->
+      <p class="text-muted">Comment form to be implemented by candidate</p>
+    </div>
+  <% else %>
+    <p class="text-muted">
+      <%= link_to "Sign in", new_user_session_path %> to leave a comment.
+    </p>
+  <% end %>
+</div>
+
+<div class="mt-3">
+  <%= link_to "← Back to Posts", posts_path, class: "btn btn-outline" %>
+</div>
