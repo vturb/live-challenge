@@ -1,5 +1,5 @@
 services:
-  devcontainer:
+  app:
     image: mcr.microsoft.com/devcontainers/ruby:dev-3.4-bullseye
     volumes:
       - ../..:/workspaces:cached
