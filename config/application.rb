@@ -16,6 +16,10 @@ module LiveChallenge
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    config.hosts.clear
+    config.hosts << "localhost"
+    config.hosts << "#{ENV['CODESPACE_NAME']}-3000.#{ENV['GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN']}" if ENV["CODESPACE_NAME"].present?
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
